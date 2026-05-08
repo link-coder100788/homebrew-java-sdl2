@@ -11,9 +11,10 @@ class JavaSdl2 < Formula
   depends_on "cmake" => build
   depends_on "openjdk"
   depends_on "sdl2"
+  depends_on "openal-soft"
 
   def install
-    system "cmake", "-S", ".", "build"
+    system "cmake", "-S", ".", "build", "-DUSE_HOMEBREW_OPENAL=ON", "-DOpenAL_ROOT=$(brew --prefix openal-soft)"
     system "cmake", "--build", "build", "--target", "jni_headers"
     system "cmake", "--build", "build", "--target", "java_sdl2"
     system "cmake", "--build", "build", "--target", "java_jar"
